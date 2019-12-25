@@ -1,0 +1,92 @@
+server:
+  pot: 8080
+  tomcat:
+    uri-encoding: utf-8
+
+spring:
+  profiles:
+    active: dev
+  http:
+    encoding:
+      force: true
+  servlet:
+      multipart:
+        enabled: true
+        max-file-size: 1MB
+        resolve-lazily: false
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    userName: qryuser
+    passWord: qryuser
+  redis:
+    host: 127.0.0.1
+    #Redis服务器连接端口
+    port: 6379
+    #密码
+    password:
+    #redis超时时间（毫秒），如果不设置，取默认值2000
+#    timeout: 2
+    #最大空闲数
+    maxIdle: 300
+    #连接池的最大数据库连接数。设为0表示无限制,如果是jedis 2.4以后用redis.maxTotal
+    #maxActive=600
+    #控制一个pool可分配多少个jedis实例,用来替换上面的redis.maxActive,如果是jedis 2.4以后用该属性
+    maxTotal: 1000
+    #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+    maxWaitMillis: 1000
+    #连接的最小空闲时间 默认1800000毫秒(30分钟)
+    minEvictableIdleTimeMillis: 300000
+    #每次释放连接的最大数目,默认3
+    numTestsPerEvictionRun: 1024
+    #逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1
+    timeBetweenEvictionRunsMillis: 30000
+    #是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
+    testOnBorrow: true
+    #在空闲时检查有效性, 默认false
+    testWhileIdle: true
+
+  # 日志
+  logging:
+    level:
+      # 设置包的日志输出级别(开发建议使用debug)
+      com.hkb.springboot: debug
+
+
+
+swagger:
+  flag: ture
+
+
+book:
+  name: 书名字
+  author: 作者名字
+  price: 20
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: wxx.boker.chapter011.infrastructure.repositories.po
+#  typeEnumsPackage: com.baomidou.springboot.entity.enums
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: id_worker
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: not_empty
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      db-type: h2
+    #刷新mapper 调试神器
+    refresh: true
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis
+<generatorConfiguration>
+    <classPathEntry location="D:\apacheMaven\repository\mysql\mysql-connector-java\5.1.35\mysql-connector-java-5.1.35.jar"/>
+    <context id="context1">
+        <!-- 是否生成注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:orcl"
+                        userId="qryuser" password="qryuser" />
+
+        <!-- 生成的包名和工程名 -->
+        <javaModelGenerator targetPackage="cn.van.entity"
+                            targetProject="src/main/java"/>
+        <!-- xml映射文件   -->
+        <sqlMapGenerator targetPackage="cn.van.mapping"
+                         targetProject="src/main/java" />
+        <!--  mapper接口    -->
+        <javaClientGenerator targetPackage="cn.van.dao"
+                             targetProject="src/main/java" type="XMLMAPPER" />
+
+        <!-- 数据库表 以及是否生成example-->
+        <table  tableName="USER_INFO" domainObjectName="USER_INFO"
+                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+                enableSelectByExample="false" selectByExampleQueryId="false" >
+            <!-- 设置别名 -->
+            <!--
+            <columnOverride column="ds_id" property="dsId" />
+            <columnOverride column="ds_name" property="dsName" />
+            <columnOverride column="dt_name" property="dtName" />
+            <columnOverride column="login_name" property="loginName" />
+            <columnOverride column="login_pwd" property="loginPwd" />
+             -->
+        </table>
+    </context>
+</generatorConfiguration>

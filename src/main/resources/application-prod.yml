@@ -1,0 +1,13 @@
+server:
+  pot: 9091
+  tomcat:
+    uri-encoding: utf-8
+
+swagger:
+  flag: ture
+
+
+book:
+  name: 书名字
+  author: 作者名字
+  price: 20

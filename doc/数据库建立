@@ -1,0 +1,35 @@
+--创建用户
+--create user qryuser identified by qryuser;
+create user qryuser identified by qryuser default tablespace data_tablesapce;
+--销毁用户
+drop user qryuser;
+--建立表空间:
+create tablespace data_tablesapce datafile 'D:\oracle11\oradata\data\data.dbf' size 300M;
+--删除命名空间
+DROP TABLESPACE data_tablesapce INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;
+--给用户授权
+grant connect，resource to qryuser;
+--–表示把 dba权限授予给testone用户 　　授权成功。
+grant dba to qryuser;
+
+
+--用户表建立
+create table USER_INFO(
+       USERSEQ number(20),
+       USERNAME varchar2(20),
+       MOBILEPHONE varchar2(11),
+       IDNO varchar2(18),
+       LOGINDATE DATE,
+       LOGINPASSWORD varchar2(20)
+)
+tablespace data_tablesapce
+;
+comment on table USER_INFO is '用户信息表';
+comment on column USER_INFO.USERSEQ is '用户序列号';
+comment on column USER_INFO.USERNAME is '姓名';
+comment on column USER_INFO.MOBILEPHONE is '手机号';
+comment on column USER_INFO.IDNO is '证件号';
+comment on column USER_INFO.LOGINDATE is '登陆日期';
+comment on column USER_INFO.LOGINPASSWORD is '密码';
+
+create sequence USERINFO_SEQ minvalue 1 maxvalue 9999999 start with 1 increment by 1;

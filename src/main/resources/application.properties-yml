@@ -1,0 +1,6 @@
+book.name="书名字"
+book.auth="auth"
+book.price=20.00
+server.port=9091
+
+swagger.flag=true
