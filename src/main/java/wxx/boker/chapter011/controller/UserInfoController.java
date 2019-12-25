@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import wxx.boker.chapter011.controller.assembler.UserInfoAssembler;
 import wxx.boker.chapter011.controller.response.UserInfoResDTO;
 import wxx.boker.chapter011.domain.entity.UserInfo;
 import wxx.boker.chapter011.infrastructure.UserInfoMapperRepo;
@@ -17,7 +18,11 @@ import javax.validation.Valid;
 public class UserInfoController {
     @Autowired
     private UserInfoMapperRepo userInfoMapperRepo;
-
+    /**
+     * 类型转换
+     */
+    @Autowired
+    private UserInfoAssembler userInfoAssembler;
 
     @ApiOperation(value = "根据用户ID查询后台用户信息", notes = "用户信息服务")
     @GetMapping(value = "/user/userInfo")
@@ -27,8 +32,7 @@ public class UserInfoController {
         if(userInfo == null){
             return new UserInfoResDTO();
         }
-        UserInfoResDTO userInfoResDTO = UserInfoResDTO.builder().userId(userInfo.getUserId())
-                .userName(userInfo.getUserName()).gender(userInfo.getGender()).mobilePhone(userInfo.getMobilePhone()).build();
+        UserInfoResDTO userInfoResDTO = userInfoAssembler.userInfo2UserInfoDTo(userInfo);
         return userInfoResDTO;
     }
 }
