@@ -13,8 +13,6 @@ public class BookJson {
     @ApiModelProperty(value = "随便写的")
     private String auth;
     @ApiModelProperty(value = "价格")
-
-
     private Long price;
 
     @ApiModelProperty(value = "时间")

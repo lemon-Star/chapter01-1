@@ -7,12 +7,16 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @KeySequence("USERINFO_SEQ")
 @TableName("USER_INFO")
-public class UserInfoPO {
+public class UserInfoPO implements Serializable {
+
+    private static final long serialVersionUID = 8731116262793710292L;
+
     @TableId(value = "USERSEQ",type = IdType.INPUT)
     private Long userseq;
 

@@ -1,6 +1,7 @@
 package wxx.boker.chapter011.controller;
 
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,11 @@ public class UserInfoController {
 
     @ApiOperation(value = "根据用户ID查询后台用户信息", notes = "用户信息服务")
     @GetMapping(value = "/user/userInfo")
-    @ApiImplicitParam(value = "用户ID",name = "userId", dataType = "Long" , required = true,paramType = "query")
-    public UserInfoResDTO getUserInfoById(@Valid String userId) {
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(value = "用户ID",name = "userId", dataType = "Long" , required = true,paramType = "query"),
+            @ApiImplicitParam(value = "用户SEQ",name = "userSeq", dataType = "Long" , required = true,paramType = "query")
+    })
+    public UserInfoResDTO getUserInfoById(@Valid String userId,@Valid String userSeq) {
         UserInfo userInfo = userInfoMapperRepo.qryUserInfoFromUserPO(userId);
         if(userInfo == null){
             return new UserInfoResDTO();
